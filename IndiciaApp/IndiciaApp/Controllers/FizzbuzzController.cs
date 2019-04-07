@@ -18,21 +18,24 @@ namespace IndiciaApp.Controllers
                 string output = "";
                 List<string> fizzbuzzvalues = new List<string>();
 
+                //check modulo 3, if yes add fizz to list
                 if (i % 3 == 0)
                 {
                     fizzbuzzvalues.Add("Fizz");
                 }
 
+                //check modulo 5, if yes add buzz to list
                 if (i % 5 == 0)
                 {
                     fizzbuzzvalues.Add("Buzz");
                 }
 
+                //if list is empty, no modulo "was found"
                 if (fizzbuzzvalues.Count <= 0)
                 {
                     output = i.ToString();
                 }
-                else
+                else //adds the found modulo to the output string
                 {
                     output = String.Join("", fizzbuzzvalues.ToArray());
                 }

@@ -56,7 +56,7 @@ namespace IndiciaApp.Controllers
                 result += int.Parse(values[i]);
             }
 
-            //set dot to end result
+            //add dot to end result
             var nfi = new NumberFormatInfo { NumberDecimalSeparator = ",", NumberGroupSeparator = "." };
             return result.ToString("#,##", nfi);
         }
