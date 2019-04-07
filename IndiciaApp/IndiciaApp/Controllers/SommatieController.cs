@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,11 +22,38 @@ namespace IndiciaApp.Controllers
             };
         }
 
-        public int GetResult()
+        public string GetResult()
         {
+            List<string> values = new List<string>();
+
+            foreach (var objects in InputValues()) {
+                if (objects != null)
+                {
+                    values.Add(objects.ToString());
+                }
+            }
+
             int result = 0;
 
-            return result;
+            for (int i = 0; i < values.Count; i++)
+            {
+                if (values[i].Contains("e"))
+                {
+                    decimal exponentionalResult;
+                    Decimal.TryParse(values[i], System.Globalization.NumberStyles.Float, null, out exponentionalResult);
+                    values[i] = exponentionalResult.ToString();
+                }
+
+                if (values[i].Contains("."))
+                {
+                    values[i] = values[i].Replace(".", "");
+                }
+
+                result += int.Parse(values[i]);
+            }
+
+            var nfi = new NumberFormatInfo { NumberDecimalSeparator = ",", NumberGroupSeparator = "." };
+            return result.ToString("#,##", nfi);
         }
 
     }
