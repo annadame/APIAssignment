@@ -22,10 +22,12 @@ namespace IndiciaApp.Controllers
             };
         }
 
+        [Route("formateer/sommatie")]
         public string GetResult()
         {
             List<string> values = new List<string>();
 
+            //set objects to strings and let empty objects out
             foreach (var objects in InputValues()) {
                 if (objects != null)
                 {
@@ -37,6 +39,7 @@ namespace IndiciaApp.Controllers
 
             for (int i = 0; i < values.Count; i++)
             {
+                //check if string has exponentional expression
                 if (values[i].Contains("e"))
                 {
                     decimal exponentionalResult;
@@ -44,6 +47,7 @@ namespace IndiciaApp.Controllers
                     values[i] = exponentionalResult.ToString();
                 }
 
+                //check if string has dot
                 if (values[i].Contains("."))
                 {
                     values[i] = values[i].Replace(".", "");
@@ -52,6 +56,7 @@ namespace IndiciaApp.Controllers
                 result += int.Parse(values[i]);
             }
 
+            //set dot to end result
             var nfi = new NumberFormatInfo { NumberDecimalSeparator = ",", NumberGroupSeparator = "." };
             return result.ToString("#,##", nfi);
         }
