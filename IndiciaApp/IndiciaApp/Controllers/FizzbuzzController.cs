@@ -9,14 +9,13 @@ namespace IndiciaApp.Controllers
 {
     public class FizzbuzzController : ApiController
     {
-        //[Route("Fizzbuzz/{from}/{to}")]
         public IEnumerable<string> Get([FromUri] int from, int to)
         {
             int number = to;
-            List<string> output = new List<string>();
 
             for (int i = from; i <= number; i++)
             {
+                string output = "";
                 List<string> fizzbuzzvalues = new List<string>();
 
                 if (i % 3 == 0)
@@ -31,16 +30,15 @@ namespace IndiciaApp.Controllers
 
                 if (fizzbuzzvalues.Count <= 0)
                 {
-                    output.Add(i.ToString());
+                    output = i.ToString();
                 }
                 else
                 {
-                    string values = String.Join("", fizzbuzzvalues.ToArray());
-                    output.Add(values);
+                    output = String.Join("", fizzbuzzvalues.ToArray());
                 }
-            }
 
-            return output;
+                yield return output;
+            }
         }
     }
 }
