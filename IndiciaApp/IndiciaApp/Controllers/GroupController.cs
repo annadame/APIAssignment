@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -44,9 +45,9 @@ namespace IndiciaApp.Controllers
         }
 
         [Route("group/json")]
-        public List<KeyValuePair<int, int>> GetGroupTwo()
+        public string GetGroupTwo()
         {
-            return GenerateList().OrderBy(x => x.Value).ToList();
+            return JsonConvert.SerializeObject(GenerateList().OrderBy(x => x.Value).ToList());
         }
     }
 }
